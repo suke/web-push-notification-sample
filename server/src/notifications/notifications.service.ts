@@ -23,35 +23,40 @@ export class NotificationsService {
   }
 
   async notify(message: string) {
-    const subscription = await this.subscriptionRepository.findOne({});
-    const pushSubscription = {
-      endpoint: subscription.endpoint,
-      keys: {
-        auth: subscription.auth,
-        p256dh: subscription.p256dh,
-      },
-    };
+    const subscriptions = await this.subscriptionRepository.find({});
 
-    const notificationPayload = {
-      notification: {
-        title: 'New Notification',
-        body: message,
-        vibrate: [100, 50, 100],
-        data: {
-          dateOfArrival: Date.now(),
-          primaryKey: 1,
-        },
-        actions: [
-          {
-            action: 'explore',
-            title: 'Go to the site',
+    Promise.all(
+      subscriptions.map(subscription => {
+        const pushSubscription = {
+          endpoint: subscription.endpoint,
+          keys: {
+            auth: subscription.auth,
+            p256dh: subscription.p256dh,
           },
-        ],
-      },
-    };
-    webpush.sendNotification(
-      pushSubscription,
-      JSON.stringify(notificationPayload),
+        };
+
+        const notificationPayload = {
+          notification: {
+            title: 'New Notification',
+            body: message,
+            vibrate: [100, 50, 100],
+            data: {
+              dateOfArrival: Date.now(),
+              primaryKey: 1,
+            },
+            actions: [
+              {
+                action: 'explore',
+                title: 'Go to the site',
+              },
+            ],
+          },
+        };
+        return webpush.sendNotification(
+          pushSubscription,
+          JSON.stringify(notificationPayload),
+        );
+      }),
     );
   }
 }
