@@ -14,9 +14,9 @@ export class NotificationsController {
 
   @Post('subscribe')
   @HttpCode(201)
-  subscribe(@Body() createSubscriptionDto: CreateSubscriptionDto) {
+  async subscribe(@Body() createSubscriptionDto: CreateSubscriptionDto) {
     const params = { ...createSubscriptionDto, ...createSubscriptionDto.keys };
-    this.notificationsService.addSubscription(params);
+    await this.notificationsService.addSubscription(params);
     return 'created';
   }
 }
