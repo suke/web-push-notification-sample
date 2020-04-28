@@ -6,7 +6,7 @@ import { Subscription as SubscriptionEntity } from 'src/models/subscription.enti
 import { Subscription } from 'src/interfaces/subscription.interface';
 
 webpush.setVapidDetails(
-  'http://localhost:1234',
+  'mailto: example@example.org',
   process.env.VAPID_PUBLIC_KEY,
   process.env.VAPID_PRIVATE_KEY,
 );
