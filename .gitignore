@@ -1,0 +1,6 @@
+./frontend/node_modules
+./frontend/dist
+./frontend/.node-version
+
+./server/dist
+./server/node_modules

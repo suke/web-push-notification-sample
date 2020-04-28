@@ -1,0 +1,10 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "passwod": "root",
+  "database": "push_notification_sample",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "synchronize": true
+}
