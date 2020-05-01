@@ -17,7 +17,15 @@ export class AppComponent {
   constructor(
     private swPush: SwPush,
     private notificationService: NotificationService,
-  ) {}
+  ) {
+    if (this.swPush.subscription) {
+      this.swPush.subscription.subscribe((subscription) => {
+        console.log(subscription);
+      });
+    } else {
+      console.log('unregistered');
+    }
+  }
 
   subscribeToNotifications() {
     this.swPush
