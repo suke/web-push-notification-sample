@@ -1,6 +1,9 @@
 # web-push-notification-sample
 
 Angular9 + NestJS を使用した web push のサンプルです。
+サービスワーカーがアセットをキャッシュするのでフロントエンドのファイルを変更する際は
+ブラウザのキャッシュを無効にしてください。
+
 事前に mysql で以下のクエリを実行して schema を作成してください。
 
 ```sql
@@ -36,4 +39,10 @@ yarn start:pwa
 
 cd ./server
 yarn start
+```
+
+## Send Notification
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"message":"Hello World!"}' http://localhost:1234/notifications
 ```
